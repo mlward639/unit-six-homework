@@ -1,5 +1,3 @@
-/* WHY IS MY WHOLE GRID NOT FLUSH WITH LEFT AND RIGHT EDGES? */
-
 .my-navbar {
     background-image: linear-gradient(to bottom right, rgb(55, 55, 247), rgb(23, 23, 99));
     text-align: center;
@@ -27,6 +25,21 @@
 }
 
 .container2 {
+    border: 4px solid red;
+}
+
+.container2 h2 {
+    font-size: 22px;
+    margin-top: 10px;
+}
+
+.container3 {
+    border: 4px solid green;
+    box-sizing: border-box;
+}
+
+
+.container4 {
     border: 4px solid purple;
     box-sizing: border-box;
 }
@@ -79,3 +92,6 @@
     margin-left: 10px;
 }
     
+.generated-cities-ul {
+    list-style-type: none;
+}
