@@ -21,7 +21,7 @@ function getAPI() {
 
 getAPI()
 */
-var submitBtn = document.querySelector('.submit-btn')
+var searchBtn = document.querySelector('.search-btn')
 var generatedCitiesUl = document.querySelector('.generated-cities-ul')
 
 
@@ -44,17 +44,17 @@ function getSavedCities (){
 function generateCitiesList () {
     for (i=0; i< getSavedCityArray.length; i++) {
         var generatedCityLi = document.createElement('li');
-        // add class to generatedCityLi
+        generatedCityLi.classList.add("generated-city-li")
         var generatedCityBtn = document.createElement('BUTTON');
-        //add class to generated city btn
+        generatedCityBtn.classList.add("generated-city-btn");        
         generatedCityLi.appendChild(generatedCityBtn
         );
-        generatedCityBtn.textContent = getSavedCityArray[i] //get from local storage
+        generatedCityBtn.textContent = getSavedCityArray[i]  
         generatedCitiesUl.appendChild(generatedCityLi);
     }
 }
 
-submitBtn.addEventListener('click', function creatingCityLists (event){
+searchBtn.addEventListener('click', function creatingCityLists (event){
     event.preventDefault //why is this not keeping the buttons from going away?
     saveCities()
     getSavedCities()
@@ -62,22 +62,3 @@ submitBtn.addEventListener('click', function creatingCityLists (event){
     return;
 }
 )
-
-
-
-/*
-submitBtn.addEventListener('click', function generateCitiesList () {
-    for (i=0; i< savedCityArray.length //NEED TO CREATE/ACCESS ARRAY OF STORED CITIES FROM LOCAL STORAGE; i++) {
-        var generatedCityLi = document.createElement('li');
-        // add class to generatedCityLi
-        var generatedCityBtn = document.createElement('BUTTON');
-        //add class to generated city btn
-        generatedCityLi.appendChild(generatedCityBtn
-        );
-        generatedCityBtn.textContent = "example" //get from local storage
-        generatedCitiesUl.appendChild(generatedCityLi);
-    }
-}
-
-
-*/

@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box
+} 
+
 .my-navbar {
     background-image: linear-gradient(to bottom right, rgb(55, 55, 247), rgb(23, 23, 99));
     text-align: center;
@@ -34,7 +38,7 @@
 }
 
 .container3 {
-    border: 4px solid green;
+    border: 1px solid green;
     box-sizing: border-box;
 }
 
@@ -94,4 +98,29 @@
     
 .generated-cities-ul {
     list-style-type: none;
+    padding: 0;
 }
+
+.generated-cities-li {
+ 
+}
+
+
+.generated-city-btn {
+    width: 100%;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: none;
+    background-color: rgb(163, 163, 163);
+    padding: 5px;
+
+}
+
+.search-btn {
+    width: 100%;
+    border-radius: 4px;
+    border: none;
+    padding: 5px;
+
+}
+
