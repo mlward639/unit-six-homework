@@ -1,32 +1,81 @@
 /* WHY IS MY WHOLE GRID NOT FLUSH WITH LEFT AND RIGHT EDGES? */
 
+.my-navbar {
+    background-image: linear-gradient(to bottom right, rgb(55, 55, 247), rgb(23, 23, 99));
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.title {
+    font-weight: bold;
+    font-size: 38px;
+}
+
 .row {
     border: 4px solid yellow;
 }
 
 .col-sm-8 {
     border: 2px solid orange;
+    
 }
 
-.col-sm-4 {
-    border: 2px solid red;
-}
-
-.container {
+.container1 {
     border: 4px solid black(151, 151, 151);
+    margin: 25px;
 }
 
 .container2 {
     border: 4px solid purple;
+    box-sizing: border-box;
 }
 
-.col-md-12 {
-    border: 2px solid green;
+.display-current-weather {
+    border: 2px solid rgb(93, 93, 248);
+    margin: auto;
+    box-sizing: border-box;
+    font-size: 20px;
+}
+
+.display-current-weather h2 {
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.title-5-day-forecast {
+    box-sizing: border-box;
+    font-size: 20px;
+    font-weight: bold;
+
+}
+
+.days {
+    background-color: rgb(28, 28, 78);
+    padding-top: 10px
+}
+
+.days h3 {
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+}
+
+.days p {
+    font-size: 16px;
+    color: white;
 }
 
 .col-md-2 {
-    border: 2px solid blue;
-    margin-right: 13px;
+    margin-right: 22px;
     margin-left: 13px;
+}
+
+.day5 {
+    margin-right: 0;
+}
+
+.day1 {
+    margin-left: 10px;
 }
     
