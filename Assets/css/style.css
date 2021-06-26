@@ -1,1 +1,32 @@
-/* find norm or reset css sheet */
+/* WHY IS MY WHOLE GRID NOT FLUSH WITH LEFT AND RIGHT EDGES? */
+
+.row {
+    border: 4px solid yellow;
+}
+
+.col-sm-8 {
+    border: 2px solid orange;
+}
+
+.col-sm-4 {
+    border: 2px solid red;
+}
+
+.container {
+    border: 4px solid black(151, 151, 151);
+}
+
+.container2 {
+    border: 4px solid purple;
+}
+
+.col-md-12 {
+    border: 2px solid green;
+}
+
+.col-md-2 {
+    border: 2px solid blue;
+    margin-right: 13px;
+    margin-left: 13px;
+}
+    

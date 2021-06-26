@@ -1,11 +1,12 @@
-/* Resets the box size of every element */
+/* think i can get rid of with bootstrap having its own normalize sheet, right?
+/* Resets the box size of every element *
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Gives the body element a parent height to compare against */
+/* Gives the body element a parent height to compare against *
 html {
   height: 100%;
 }
@@ -20,14 +21,16 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 100%;
 }
 
-/* Matches the font of special elements to the rest of the page */
+/* Matches the font of special elements to the rest of the page *
 input, select, option, optgroup, textarea, button,
 pre, code {
   font-size: 100%;
   font-family: inherit;
 }
 
-/* Removes default bullet points from lists */
+/* Removes default bullet points from lists *
 ol, ul {
   list-style: none;
 }
+
+*/
