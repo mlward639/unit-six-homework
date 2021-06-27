@@ -14,6 +14,8 @@ var savedCityArray = [] //cityInput.value;
 var getSavedCityArray = []
 var combinedSavedCityArray
 var error = new Error('Cannot search the same city twice');
+var lat;
+var lon;
 
 /* ONE CALL HAS
 CURRENT WEATHER, COORDs
@@ -34,31 +36,36 @@ function getInputValue () {
     }
 } 
 
-function getOneCallWeatherAPI() {
+function getCurrentWeatherAPI() {
     var baseUrl = 'https://api.openweathermap.org/data/2.5/weather';
-    var requestUrl = baseUrl + '?q=' + inputedCityName + '&appid=' + APIKey;
+    var requestUrl = baseUrl + '?q=' + inputedCityName + '&units=imperial&appid=' + APIKey;
     console.log("requestURL: "+ requestUrl)
     fetch(requestUrl)
         .then(function (response) {
             return response.json();
         })
         .then(function(data) {
-            console.log("one call weather data next line")
+            console.log("get current weather data next line")
             console.log(data);
-        })
-}
+            lat = data.coord.lat;
+            console.log("lat : " + lat);  
+            lon = data.coord.lon;
+            console.log("lon: " + lon);
+            function getOneCallWeatherAPI() {
+                var baseUrl = 'https://api.openweathermap.org/data/2.5/onecall';  
+                var requestUrl = baseUrl + '?lat=' + lat + '&lon=' + lon + '&exclude=minutely,hourly,alerts&units=imperial&appid=' + APIKey
+                console.log("requestURL: " + requestUrl);
+                fetch(requestUrl)
+                    .then(function (response) {
+                        return response.json();
+                    })
+                    .then(function(data) {
+                        console.log("OneCall data next line")
+                        console.log(data)
+                    })
+            }
 
-function getFiveDayForecastAPI() {
-    var baseUrl = 'https://api.openweathermap.org/data/2.5/forecast';
-    var requestUrl = baseUrl + '?q=' + inputedCityName + '&appid=' + APIKey;
-    console.log("requestURL: " + requestUrl);
-    fetch(requestUrl)
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function(data) {
-            console.log("Five day forcast data next line")
-            console.log(data)
+            getOneCallWeatherAPI();  
         })
 }
 
@@ -78,51 +85,47 @@ function getSavedCities (){
     console.log("get cit arr: " + getSavedCityArray)
     for (i=0; i< getSavedCityArray.length; i++) {
         var generatedCityLi = document.createElement('li');
-        generatedCityLi.classList.add("generated-city-li")
+        generatedCityLi.classList.add("generated-city-li");
         var generatedCityBtn = document.createElement('BUTTON');
         generatedCityBtn.classList.add("generated-city-btn");        
-        generatedCityLi.appendChild(generatedCityBtn
-        );
-        generatedCityBtn.textContent = getSavedCityArray[i]  
+        generatedCityLi.appendChild(generatedCityBtn);
+        generatedCityBtn.textContent = getSavedCityArray[i];  
         generatedCitiesUl.appendChild(generatedCityLi);
+        getSavedCurrentWeatherAPI()
     }
-    function getSavedOneCallWeatherAPI() {
-        var baseUrl = 'https://api.openweathermap.org/data/2.5/weather';
-        for (i=0; i < getSavedCityArray.length; i++) {
-            var requestUrl = baseUrl + '?q=' + getSavedCityArray[i] + '&appid=' + APIKey;
-            console.log("requestURL: "+ requestUrl)
+        function getSavedCurrentWeatherAPI() {
+            var baseUrl = 'https://api.openweathermap.org/data/2.5/weather';
+            var requestUrl = baseUrl + '?q=' + getSavedCityArray[i] + '&units=imperial&appid=' + APIKey;
+            console.log("requestURL: "+ requestUrl);
             fetch(requestUrl)
                 .then(function (response) {
                     return response.json();
                 })
                 .then(function(data) {
-                    console.log("one call saved weather data for " + getSavedCityArray[i] + "next line")
+                    console.log("get current weather saved data for " + getSavedCityArray[i] + " next line") //why is this saying the getSavedCityArray[i] is undefined in console log but still pulling data from right city...?
                     console.log(data);
-                })
-            }
-    }
-getSavedOneCallWeatherAPI();
-
-    function getSavedFiveDayForecastAPI() {
-        var baseUrl = 'https://api.openweathermap.org/data/2.5/forecast';
-        for (i=0; i < getSavedCityArray.length; i++) {
-            var requestUrl = baseUrl + '?q=' + getSavedCityArray[i] + '&appid=' + APIKey;
-            console.log("requestURL: " + requestUrl);
-            console.log(getSavedCityArray[i])
-            fetch(requestUrl)
-                .then(function (response) {
-                    return response.json();
-                })
-                .then(function(data) {
-                    console.log("Five day forecast saved data for " + getSavedCityArray[i] + "next line")
-                    console.log(data)
-                })
-        }
-    }
-getSavedFiveDayForecastAPI();
-
-}
-
+                    lat = data.coord.lat;
+                    console.log("lat : " + lat);  
+                    lon = data.coord.lon;
+                    console.log("lon: " + lon);
+                    function getSavedOneCallWeatherAPI() {
+                        var baseUrl = 'https://api.openweathermap.org/data/2.5/onecall';  
+                        var requestUrl = baseUrl + '?lat=' + lat + '&lon=' + lon + '&exclude=minutely,hourly,alerts&units=imperial&appid=' + APIKey
+                        console.log("requestURL: " + requestUrl);
+                        console.log(getSavedCityArray[i]);
+                        fetch(requestUrl)
+                            .then(function (response) {
+                            return response.json();
+                            })
+                            .then(function(data) {
+                            console.log("OneCall saved data for " + getSavedCityArray[i] + "next line") //why is this saying the getSavedCityArray[i] is undefined in console log but still pulling data from right city...?
+                            console.log(data)
+                            })
+                        } //end getOneCall fxn
+                    getSavedOneCallWeatherAPI();
+                }) //end then fxn data
+    } //end get saved weather api fxn
+}//end get saved cities fxn
 getSavedCities();
 
 //add error message if the city returns no data
@@ -140,12 +143,12 @@ function generateCitiesList () {
     }
 
 
+//run these functions when clicking the search button
 searchBtn.addEventListener('click', function creatingCityLists (event){
     getInputValue();
     saveCities();
     generateCitiesList();
-    getOneCallWeatherAPI()
-    getFiveDayForecastAPI();
+    getCurrentWeatherAPI()
     blankInputEl.value = ''; 
     return;
 }
