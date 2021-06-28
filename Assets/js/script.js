@@ -61,6 +61,8 @@ var lon;
  
 var today = moment().format("MM/DD/YY");
 
+var generatedCityBtn;
+
 //functions
 
 //input value set to the city name. error messages if duplicates or empty 
@@ -214,13 +216,29 @@ function saveCities () {
 }
 
 //on page load, get all the saved cities from last search (saved to local storage) and make the buttons and perform API searches on them again
+function clickGeneratedCityBtn () { 
+    generatedCityBtn.addEventListener('click', function (event){
+        currentCityH2.textContent = "";
+        weatherIconCurrent = '';
+        currentTemp.textContent = "";
+        currentWind.textContent = "";
+        currentHumidity.textContent = "";
+        inputedCityName = '';
+        inputedCityName = event.target.value; 
+        //console.log("INPUT CITY", inputedCityName)
+        //console.log("RUNNING FUNCTIPONNN")
+        getCurrentWeatherAPI();
+        console.log("is clickcitybtn working? ");
+    }) 
+}
+
 function getSavedCities (){
     getSavedCityArray = JSON.parse(localStorage.getItem("savedCityNameArray")) || ""; //look here for why the button is calling the wrong value....?
     console.log("get cit arr&77777777: " + getSavedCityArray)
     for (i=0; i< getSavedCityArray.length; i++) {
         var generatedCityLi = document.createElement('li');
         generatedCityLi.classList.add("generated-city-li");
-        var generatedCityBtn = document.createElement('BUTTON');
+        generatedCityBtn = document.createElement('BUTTON');
         generatedCityBtn.value = getSavedCityArray[i]; 
         console.log("NEW BUTTON VALUE: " + generatedCityBtn.value)
         generatedCityBtn.classList.add("generated-city-btn");        
@@ -228,6 +246,7 @@ function getSavedCities (){
         generatedCityBtn.textContent = getSavedCityArray[i];  
         generatedCitiesUl.appendChild(generatedCityLi);
         getSavedCurrentWeatherAPI();
+        clickGeneratedCityBtn();
     }
 
         function getSavedCurrentWeatherAPI() {
@@ -279,28 +298,10 @@ function generateCitiesList () {
     generatedCitiesUl.appendChild(generatedCityLi);
     console.log("NEW BUTTON VALUE: " + generatedCityBtn.value)
     //need to also do this to the saved array of cities once figure out the correct functioning 
-    generatedCityBtn.addEventListener('click', function (){
-        currentCityH2.textContent = "";
-        weatherIconCurrent = '';
-        currentTemp.textContent = "";
-        currentWind.textContent = "";
-        currentHumidity.textContent = "";
-        inputedCityName = '';
-        //trying to get it to capture the value of the button (which is the city name) and then run that city through the getCurrentWeatherAPI function, just like if i entered it in the search bar
-        inputedCityName = generatedCityBtn.value; //!!!!!!!!!!its taking the value from the last generatedBtn, not from the clicked button!!!!!!!!!!!!!!!!!!!!! is this because i am not specific which generatedCityBtn here...? if so, how can i be more specific? i tried adding classes/id to the button with i to make unique but didnt work
-        console.log("BTN VALUE", generatedCityBtn.value)
-        //its running the value of the button of the most recent city entered, not the actual button clicked. but on inspection, the button retains its actual value of the correct city...? so how to get it to capture the value of the button i am clicking???
-        /*********************************************************** */
-        console.log('THE NAME IT IS INPUTING, SHOULD EQUAL THE VALUE ' + inputedCityName)
+    
+    clickGeneratedCityBtn();
 
-        console.log("RUNNING FUNCTIPONNN")
-        getCurrentWeatherAPI(); //function running in console log but not displaying on the webpage....?
-    }) 
-    /* for (i=0; i < getSavedCityArray.length; i++) {
-        var cityBtn, i = generatedCityBtn;
-        console.log("trying to delineate city names/buttons to target specififically: " + cityBtn, i)
-    } */
-    }
+}
 
 
 
