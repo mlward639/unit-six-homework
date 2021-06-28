@@ -124,3 +124,12 @@
 
 }
 
+.weather-icon-current {
+    background-color: purple;
+}
+
+.weather-icon-current {
+    width: 5%;
+    height: 5%
+}
+

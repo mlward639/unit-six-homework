@@ -4,12 +4,11 @@ var blankInputEl = document.querySelector("#input-city-name");
 var searchBtn = document.querySelector('.search-btn')
 var generatedCitiesUl = document.querySelector('.generated-cities-ul')
 var currentCityH2 = document.querySelector('.current-city-name')
+var currentWeatherIcon = document.querySelector('weather-icon-current')
 var currentTemp = document.querySelector('.current-temp');
 var currentWind = document.querySelector('.current-wind');
 var currentHumidity = document.querySelector('.current-humidity');
 var currentUVI = document.querySelector('.current-UVI')
-var weatherIconGoesHere = document.querySelector(".current-city-name")
-var weatherIcon = document.createElement('img')
 var UVIBtn = document.createElement("BUTTON")
 
 var dayOne = document.querySelector(".day1");
@@ -69,10 +68,15 @@ var today = moment().format("MM/DD/YY");
 function getInputValue () {
     inputedCityName = blankInputEl.value;
     console.log("inputctyname: " + inputedCityName)
-    //look if in INCLUDES it matters if capital or lowercase. seems like a lot of work to capitalize just first letter of each word so wont do unless it matters for API search
     if (getSavedCityArray.includes(inputedCityName)) {
         //is it ok to use alert here?
         window.alert("Cannot search the same city twice");
+        blankInputEl.value = ''; 
+        throw error;
+    }
+    if (!inputedCityName) {
+        //is it ok to use alert here?
+        window.alert("Cannot leave blank. Must enter a city.");
         blankInputEl.value = ''; 
         throw error;
     }
@@ -84,6 +88,12 @@ function getCurrentWeatherAPI() {
     console.log("requestURL: "+ requestUrl)
     fetch(requestUrl)
         .then(function (response) {
+            /* trying to throw error if the entered city is not found
+            if (!response == 200) {
+                //is it ok to use alert here?
+                window.alert("ERROR");
+                throw error;
+            } */
             return response.json();
         })
         .then(function(data) {
@@ -96,9 +106,11 @@ function getCurrentWeatherAPI() {
             console.log("icon " + data.weather[0].icon)
             if (data.weather[0].icon == "01n" || "04n") {
                 console.log("Weather icon if stmt is working") //YES so its an issue attaching source...
-                weatherIcon.src="Assets/images/01d.png" //why wont it link to my picture??? says 404 not found for the image
-                //now it has the same icon 01n but still not meeting the criteria to generate img
-                weatherIconGoesHere.appendChild(weatherIcon);
+                //currentWeatherIcon.src='./Assets/images/01d.png'
+                //currentCityH2.appendChild(currentWeatherIcon);
+
+                //now it has the same icon 01n but still not generating img even though it is console logging my statement
+                //****************************************************** */
             }  
             currentCityH2.textContent = inputedCityName + " (" + today + ")";
             weatherIconCurrent = document.createElement('img');
@@ -267,7 +279,9 @@ function generateCitiesList () {
         currentTemp.textContent = "";
         currentWind.textContent = "";
         currentHumidity.textContent = "";
-        inputedCityName = generatedCityBtn.value; //its running the value of the button of the most recent city entered, not the actual button clicked. but on inspection, the button retains its actual value of the correct city...?
+        //trying to get it to capture the value of the button (which is the city name) and then run that city through the getCurrentWeatherAPI function, just like if i entered it in the search bar
+        inputedCityName = generatedCityBtn.value; //its running the value of the button of the most recent city entered, not the actual button clicked. but on inspection, the button retains its actual value of the correct city...? so how to get it to capture the value of the button i am clicking???
+        /*********************************************************** */
         console.log(inputedCityName)
 
         console.log("RUNNING FUNCTIPONNN")
