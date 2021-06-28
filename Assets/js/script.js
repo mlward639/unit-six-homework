@@ -1,5 +1,4 @@
-//api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
-
+//Setting variables, mostly Query selectors
 var blankInputEl = document.querySelector("#input-city-name");
 var searchBtn = document.querySelector('.search-btn')
 var generatedCitiesUl = document.querySelector('.generated-cities-ul')
@@ -46,25 +45,25 @@ var dayFiveTemp = document.querySelector('.temp-day5');
 var dayFiveWind = document.querySelector(".wind-day5");
 var dayFiveHumidity = document.querySelector(".humidity-day5");
 
-
-
-//for moving weather from current to one of the 5 cards, see if you can reassign the class from the current container to the card to move that information down...
 var APIKey = '3a1df45ecc477b266d4c9b728ee5cd1e'
 
-var inputedCityName = '' //update later to be what they enter into the form
+var inputedCityName = ''  
 
 //var cityInput = document.querySelector("#input-city-name");
 var savedCityArray = [] //cityInput.value;
-//console.log(inputedCityName)
 var getSavedCityArray = []
 var combinedSavedCityArray
-var error = new Error('Cannot search the same city twice');
+var error1 = new Error('Cannot search the same city twice');
+var error2 = new Error('No value inputed for city name');
+var error3 = new Error('City name not found');
 var lat;
 var lon;
  
 var today = moment().format("MM/DD/YY");
 
+//functions
 
+//input value set to the city name. error messages if duplicates or empty 
 function getInputValue () {
     inputedCityName = blankInputEl.value;
     console.log("inputctyname: " + inputedCityName)
@@ -82,10 +81,12 @@ function getInputValue () {
     }
 } 
 
+//create unique URL to run through both weatherAPIs to obtain weather information & then display that to the page
 function getCurrentWeatherAPI() {
     var baseUrl = 'https://api.openweathermap.org/data/2.5/weather';
     var requestUrl = baseUrl + '?q=' + inputedCityName + '&units=imperial&appid=' + APIKey;
     console.log("requestURL: "+ requestUrl)
+    console.log(inputedCityName, "jfkdjfkdsjf;")
     fetch(requestUrl)
         .then(function (response) {
             /* trying to throw error if the entered city is not found
@@ -100,10 +101,10 @@ function getCurrentWeatherAPI() {
             console.log("get current weather data next line")
             console.log(data);
             lat = data.coord.lat;
-            console.log("lat : " + lat);  
+            //console.log("lat : " + lat);  
             lon = data.coord.lon;
-            console.log("lon: " + lon);
-            console.log("icon " + data.weather[0].icon)
+            //console.log("lon: " + lon);
+            //console.log("icon " + data.weather[0].icon)
             if (data.weather[0].icon == "01n" || "04n") {
                 console.log("Weather icon if stmt is working") //YES so its an issue attaching source...
                 //currentWeatherIcon.src='./Assets/images/01d.png'
@@ -114,11 +115,11 @@ function getCurrentWeatherAPI() {
             }  
             currentCityH2.textContent = inputedCityName + " (" + today + ")";
             weatherIconCurrent = document.createElement('img');
-            console.log("temp: " + data.main.temp);
+            //console.log("temp: " + data.main.temp);
             currentTemp.textContent = "Temp: " + data.main.temp + "\u00B0 F";
-            console.log("wind: " + data.wind.speed);
+            //console.log("wind: " + data.wind.speed);
             currentWind.textContent = "Wind: " + data.wind.speed + " MPH";
-            console.log("humidity: " + data.main.humidity);
+            //console.log("humidity: " + data.main.humidity);
             currentHumidity.textContent = "Humidity: " + data.main.humidity + "%";
             function getOneCallWeatherAPI() {
                 var baseUrl = 'https://api.openweathermap.org/data/2.5/onecall';  
@@ -131,9 +132,10 @@ function getCurrentWeatherAPI() {
                     .then(function(data) {
                         console.log("OneCall data next line")
                         console.log(data)
-                        UVIBtn.textContent = data.current.uvi //make sure it is matching the unique UVI of each city when generated each time and not duplicating button
+                        //creating button with the UVI value displayed and setting color based on the value
+                        UVIBtn.textContent = data.current.uvi  
                         currentUVI.appendChild(UVIBtn);
-                        console.log("UV index: " + data.current.uvi);
+                        //console.log("UV index: " + data.current.uvi);
                         if (data.current.uvi < 3) {
                             UVIBtn.style.backgroundColor = "green";
                         } else if (data.current.uvi < 6) {
@@ -147,48 +149,48 @@ function getCurrentWeatherAPI() {
                         }
                         //day one card
                         dayOneTitle.textContent = moment().add(1, 'days').format("MM/DD/YY"); 
-                        console.log("day1 icon " + data.daily[1].weather[0].icon) //figure out
-                        console.log("day1 temp " + data.daily[1].temp.day) 
+                        //console.log("day1 icon " + data.daily[1].weather[0].icon) //figure out
+                        //console.log("day1 temp " + data.daily[1].temp.day) 
                         dayOneTemp.textContent = "Temp: " + data.daily[1].temp.day + "\u00B0 F";
-                        console.log("day1 wind: " + data.daily[1].wind_speed);
+                        //console.log("day1 wind: " + data.daily[1].wind_speed);
                         dayOneWind.textContent = "Wind: " + data.daily[1].wind_speed + " MPH";
-                        console.log("humidity day one: " + data.daily[1].humidity);
+                        //console.log("humidity day one: " + data.daily[1].humidity);
                         dayOneHumidity.textContent = "Humidity: " + data.daily[1].humidity + "%";
                         //day two card
                         dayTwoTitle.textContent = moment().add(2, 'days').format("MM/DD/YY"); 
-                        console.log("day2 icon " + data.daily[2].weather[0].icon) //figure out
-                        console.log("day2 temp " + data.daily[2].temp.day) 
+                        //console.log("day2 icon " + data.daily[2].weather[0].icon) //figure out
+                        //console.log("day2 temp " + data.daily[2].temp.day) 
                         dayTwoTemp.textContent = "Temp: " + data.daily[2].temp.day + "\u00B0 F";
-                        console.log("day2 wind: " + data.daily[2].wind_speed);
+                        //console.log("day2 wind: " + data.daily[2].wind_speed);
                         dayTwoWind.textContent = "Wind: " + data.daily[2].wind_speed + " MPH";
-                        console.log("humidity day2: " + data.daily[2].humidity);
+                        //console.log("humidity day2: " + data.daily[2].humidity);
                         dayTwoHumidity.textContent = "Humidity: " + data.daily[2].humidity + "%";
                         //day three card
                         dayThreeTitle.textContent = moment().add(3, 'days').format("MM/DD/YY"); 
-                        console.log("day3 icon " + data.daily[3].weather[0].icon) //figure out
-                        console.log("day3 temp " + data.daily[3].temp.day) 
+                        //console.log("day3 icon " + data.daily[3].weather[0].icon) //figure out
+                        //console.log("day3 temp " + data.daily[3].temp.day) 
                         dayThreeTemp.textContent = "Temp: " + data.daily[3].temp.day + "\u00B0 F";
-                        console.log("day3 wind: " + data.daily[3].wind_speed);
+                        //console.log("day3 wind: " + data.daily[3].wind_speed);
                         dayThreeWind.textContent = "Wind: " + data.daily[3].wind_speed + " MPH";
-                        console.log("humidity day 3: " + data.daily[3].humidity);
+                        //console.log("humidity day 3: " + data.daily[3].humidity);
                         dayThreeHumidity.textContent = "Humidity: " + data.daily[3].humidity + "%";
                         //day four card
                         dayFourTitle.textContent = moment().add(4, 'days').format("MM/DD/YY"); 
-                        console.log("day4 icon " + data.daily[4].weather[0].icon) //figure out
-                        console.log("day4 temp " + data.daily[4].temp.day) 
+                        //console.log("day4 icon " + data.daily[4].weather[0].icon) //figure out
+                        //console.log("day4 temp " + data.daily[4].temp.day) 
                         dayFourTemp.textContent = "Temp: " + data.daily[4].temp.day + "\u00B0 F";
-                        console.log("day4 wind: " + data.daily[4].wind_speed);
+                        //console.log("day4 wind: " + data.daily[4].wind_speed);
                         dayFourWind.textContent = "Wind: " + data.daily[4].wind_speed + " MPH";
-                        console.log("humidity day 4: " + data.daily[4].humidity);
+                        //console.log("humidity day 4: " + data.daily[4].humidity);
                         dayFourHumidity.textContent = "Humidity: " + data.daily[4].humidity + "%";                        
                         //day five card
                         dayFiveTitle.textContent = moment().add(5, 'days').format("MM/DD/YY"); 
-                        console.log("day5 icon " + data.daily[5].weather[0].icon) //figure out
-                        console.log("day5 temp " + data.daily[5].temp.day) 
+                        //console.log("day5 icon " + data.daily[5].weather[0].icon) //figure out
+                        //console.log("day5 temp " + data.daily[5].temp.day) 
                         dayFiveTemp.textContent = "Temp: " + data.daily[5].temp.day + "\u00B0 F";
-                        console.log("day5 wind: " + data.daily[5].wind_speed);
+                        //console.log("day5 wind: " + data.daily[5].wind_speed);
                         dayThreeWind.textContent = "Wind: " + data.daily[5].wind_speed + " MPH";
-                        console.log("humidity day 5: " + data.daily[5].humidity);
+                        //console.log("humidity day 5: " + data.daily[5].humidity);
                         dayFiveHumidity.textContent = "Humidity: " + data.daily[5].humidity + "%";
                     })
             }
@@ -196,11 +198,16 @@ function getCurrentWeatherAPI() {
         })
 }
 
+//save cities to array in local storage
 function saveCities () {
+    //add new city name to the array 
     savedCityArray.push(inputedCityName)
+    //if there is already values in the array, then concat the saved array to this new array (consisting of any cities searched while the browser is open)
     if (getSavedCityArray.length > 0) {
         combinedSavedCityArray = savedCityArray.concat(getSavedCityArray)
+        //console.log("LENGTH" + getSavedCityArray.length)
         localStorage.setItem("savedCityNameArray", JSON.stringify(combinedSavedCityArray));
+    //if array is empty, save to local storage 
     } else {
         localStorage.setItem("savedCityNameArray", JSON.stringify(savedCityArray));
     }
@@ -208,8 +215,8 @@ function saveCities () {
 
 //on page load, get all the saved cities from last search (saved to local storage) and make the buttons and perform API searches on them again
 function getSavedCities (){
-    getSavedCityArray = JSON.parse(localStorage.getItem("savedCityNameArray")) || "";
-    console.log("get cit arr: " + getSavedCityArray)
+    getSavedCityArray = JSON.parse(localStorage.getItem("savedCityNameArray")) || ""; //look here for why the button is calling the wrong value....?
+    console.log("get cit arr&77777777: " + getSavedCityArray)
     for (i=0; i< getSavedCityArray.length; i++) {
         var generatedCityLi = document.createElement('li');
         generatedCityLi.classList.add("generated-city-li");
@@ -235,9 +242,9 @@ function getSavedCities (){
                     console.log("get current weather saved data for " + getSavedCityArray[i] + " next line") //why is this saying the getSavedCityArray[i] is undefined in console log but still pulling data from right city...?
                     console.log(data);
                     lat = data.coord.lat;
-                    console.log("lat : " + lat);  
+                    //console.log("lat : " + lat);  
                     lon = data.coord.lon;
-                    console.log("lon: " + lon);
+                    //console.log("lon: " + lon);
                     function getSavedOneCallWeatherAPI() {
                         var baseUrl = 'https://api.openweathermap.org/data/2.5/onecall';  
                         var requestUrl = baseUrl + '?lat=' + lat + '&lon=' + lon + '&exclude=minutely,hourly,alerts&units=imperial&appid=' + APIKey
@@ -259,14 +266,13 @@ function getSavedCities (){
 getSavedCities();
 
 //add error message if the city returns no data
-//figure out if capital vs lowercase matters for cities searched
-//figure out of spaces between city names (like new york city) matters
 
+//create city list under search bar made of buttons with the name of the city searched
 function generateCitiesList () {
     generatedCityLi = document.createElement('li');
     generatedCityLi.classList.add("generated-city-li")
     generatedCityBtn = document.createElement('BUTTON');
-    generatedCityBtn.value = inputedCityName
+    generatedCityBtn.value = inputedCityName;
     generatedCityBtn.classList.add("generated-city-btn");        
     generatedCityLi.appendChild(generatedCityBtn);
     generatedCityBtn.textContent = inputedCityName; 
@@ -279,18 +285,21 @@ function generateCitiesList () {
         currentTemp.textContent = "";
         currentWind.textContent = "";
         currentHumidity.textContent = "";
+        inputedCityName = '';
         //trying to get it to capture the value of the button (which is the city name) and then run that city through the getCurrentWeatherAPI function, just like if i entered it in the search bar
-        inputedCityName = generatedCityBtn.value; //its running the value of the button of the most recent city entered, not the actual button clicked. but on inspection, the button retains its actual value of the correct city...? so how to get it to capture the value of the button i am clicking???
+        inputedCityName = generatedCityBtn.value; //!!!!!!!!!!its taking the value from the last generatedBtn, not from the clicked button!!!!!!!!!!!!!!!!!!!!! is this because i am not specific which generatedCityBtn here...? if so, how can i be more specific? i tried adding classes/id to the button with i to make unique but didnt work
+        console.log("BTN VALUE", generatedCityBtn.value)
+        //its running the value of the button of the most recent city entered, not the actual button clicked. but on inspection, the button retains its actual value of the correct city...? so how to get it to capture the value of the button i am clicking???
         /*********************************************************** */
-        console.log(inputedCityName)
+        console.log('THE NAME IT IS INPUTING, SHOULD EQUAL THE VALUE ' + inputedCityName)
 
         console.log("RUNNING FUNCTIPONNN")
         getCurrentWeatherAPI(); //function running in console log but not displaying on the webpage....?
     }) 
-    for (i=0; i < getSavedCityArray.length; i++) {
+    /* for (i=0; i < getSavedCityArray.length; i++) {
         var cityBtn, i = generatedCityBtn;
         console.log("trying to delineate city names/buttons to target specififically: " + cityBtn, i)
-    }
+    } */
     }
 
 
@@ -327,4 +336,4 @@ searchBtn.addEventListener('click', function creatingCityLists (event){
 
 
 //if click on button, search button value as search input
-
+//add search API fxn for saved cities
