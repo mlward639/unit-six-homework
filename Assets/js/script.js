@@ -202,12 +202,15 @@ function getSavedCities (){
         var generatedCityLi = document.createElement('li');
         generatedCityLi.classList.add("generated-city-li");
         var generatedCityBtn = document.createElement('BUTTON');
+        generatedCityBtn.value = getSavedCityArray[i]; 
+        console.log("NEW BUTTON VALUE: " + generatedCityBtn.value)
         generatedCityBtn.classList.add("generated-city-btn");        
         generatedCityLi.appendChild(generatedCityBtn);
         generatedCityBtn.textContent = getSavedCityArray[i];  
         generatedCitiesUl.appendChild(generatedCityLi);
-        getSavedCurrentWeatherAPI()
+        getSavedCurrentWeatherAPI();
     }
+
         function getSavedCurrentWeatherAPI() {
             var baseUrl = 'https://api.openweathermap.org/data/2.5/weather';
             var requestUrl = baseUrl + '?q=' + getSavedCityArray[i] + '&units=imperial&appid=' + APIKey;
@@ -251,10 +254,25 @@ function generateCitiesList () {
     generatedCityLi = document.createElement('li');
     generatedCityLi.classList.add("generated-city-li")
     generatedCityBtn = document.createElement('BUTTON');
+    generatedCityBtn.value = inputedCityName
     generatedCityBtn.classList.add("generated-city-btn");        
     generatedCityLi.appendChild(generatedCityBtn);
     generatedCityBtn.textContent = inputedCityName; 
     generatedCitiesUl.appendChild(generatedCityLi);
+    console.log("NEW BUTTON VALUE: " + generatedCityBtn.value)
+    //need to also do this to the saved array of cities once figure out the correct functioning 
+    generatedCityBtn.addEventListener('click', function (){
+        currentCityH2.textContent = "";
+        weatherIconCurrent = '';
+        currentTemp.textContent = "";
+        currentWind.textContent = "";
+        currentHumidity.textContent = "";
+        inputedCityName = generatedCityBtn.value; //its running the value of the button of the most recent city entered, not the actual button clicked. but on inspection, the button retains its actual value of the correct city...?
+        console.log(inputedCityName)
+
+        console.log("RUNNING FUNCTIPONNN")
+        getCurrentWeatherAPI(); //function running in console log but not displaying on the webpage....?
+    }) 
     for (i=0; i < getSavedCityArray.length; i++) {
         var cityBtn, i = generatedCityBtn;
         console.log("trying to delineate city names/buttons to target specififically: " + cityBtn, i)
@@ -292,3 +310,7 @@ searchBtn.addEventListener('click', function creatingCityLists (event){
     return;
 }
 )
+
+
+//if click on button, search button value as search input
+
