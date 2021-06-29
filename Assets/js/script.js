@@ -3,7 +3,7 @@ var blankInputEl = document.querySelector("#input-city-name");
 var searchBtn = document.querySelector('.search-btn')
 var generatedCitiesUl = document.querySelector('.generated-cities-ul')
 var currentCityH2 = document.querySelector('.current-city-name')
-var currentWeatherIcon = document.querySelector('weather-icon-current')
+var weatherIconCard0 = document.querySelector('weather-icon-current')
 var currentTemp = document.querySelector('.current-temp');
 var currentWind = document.querySelector('.current-wind');
 var currentHumidity = document.querySelector('.current-humidity');
@@ -44,6 +44,9 @@ var dayFiveTitle = document.querySelector(".day5-title");
 var dayFiveTemp = document.querySelector('.temp-day5');
 var dayFiveWind = document.querySelector(".wind-day5");
 var dayFiveHumidity = document.querySelector(".humidity-day5");
+
+var weatherIconArray = [weatherIconCard0, weatherIconCard1, weatherIconCard2, weatherIconCard3, weatherIconCard4, weatherIconCard5];
+var cityTitleArray = [currentCityH2, dayOneTitle, dayTwoTitle, dayThreeTitle, dayFourTitle, dayFiveTitle];
 
 var APIKey = '3a1df45ecc477b266d4c9b728ee5cd1e'
 
@@ -106,17 +109,8 @@ function getCurrentWeatherAPI() {
             //console.log("lat : " + lat);  
             lon = data.coord.lon;
             //console.log("lon: " + lon);
-            //console.log("icon " + data.weather[0].icon)
-            if (data.weather[0].icon == "01n" || "04n") {
-                console.log("Weather icon if stmt is working") //YES so its an issue attaching source...
-                //currentWeatherIcon.src='./Assets/images/01d.png'
-                //currentCityH2.appendChild(currentWeatherIcon);
-
-                //now it has the same icon 01n but still not generating img even though it is console logging my statement
-                //****************************************************** */
-            }  
+            //console.log("icon " + data.weather[0].icon) 
             currentCityH2.textContent = inputedCityName + " (" + today + ")";
-            weatherIconCurrent = document.createElement('img');
             //console.log("temp: " + data.main.temp);
             currentTemp.textContent = "Temp: " + data.main.temp + "\u00B0 F";
             //console.log("wind: " + data.wind.speed);
@@ -194,6 +188,15 @@ function getCurrentWeatherAPI() {
                         dayThreeWind.textContent = "Wind: " + data.daily[5].wind_speed + " MPH";
                         //console.log("humidity day 5: " + data.daily[5].humidity);
                         dayFiveHumidity.textContent = "Humidity: " + data.daily[5].humidity + "%";
+                        //weather icons 
+                        for (i = 0; i < weatherIconArray.length; i++) {
+                            weatherIconArray[i] = document.createElement('img');
+                            weatherIconArray[i].src = "https://openweathermap.org/img/wn/" + data.daily[i].weather[0].icon + "@2x.png";
+                            weatherIconArray[i].classList.add("weather-icon-image");
+                            //console.log("WEATHER ICON ARRAY: " + weather);
+                            cityTitleArray[i].appendChild(weatherIconArray[i]);
+                        }
+                        weatherIconArray[0].setAttribute('id', 'current-weather-icon-image');                     
                     })
             }
             getOneCallWeatherAPI();  
@@ -296,11 +299,8 @@ function generateCitiesList () {
     generatedCityLi.appendChild(generatedCityBtn);
     generatedCityBtn.textContent = inputedCityName; 
     generatedCitiesUl.appendChild(generatedCityLi);
-    console.log("NEW BUTTON VALUE: " + generatedCityBtn.value)
-    //need to also do this to the saved array of cities once figure out the correct functioning 
-    
+    console.log("NEW BUTTON VALUE: " + generatedCityBtn.value);    
     clickGeneratedCityBtn();
-
 }
 
 
