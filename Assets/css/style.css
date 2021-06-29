@@ -1,7 +1,10 @@
+/* Styling */
+
 * {
     box-sizing: border-box
 } 
 
+/* Navbar with gradient background color and centered text */
 .my-navbar {
     background-image: linear-gradient(to bottom right, rgb(55, 55, 247), rgb(23, 23, 99));
     text-align: center;
@@ -14,6 +17,7 @@
     font-size: 38px;
 }
 
+/* Border colors for editing/formatting purposes  
 .row {
     border: 4px solid yellow;
 }
@@ -25,11 +29,26 @@
 
 .container1 {
     border: 4px solid black(151, 151, 151);
-    margin: 25px;
 }
 
 .container2 {
     border: 4px solid red;
+}
+
+.container3 {
+    border: 1px solid green;
+}
+
+.container4 {
+    border: 4px solid purple;
+}
+
+
+
+*/
+
+.container1 {
+    margin: 25px;
 }
 
 .container2 h2 {
@@ -37,22 +56,18 @@
     margin-top: 10px;
 }
 
-.container3 {
-    border: 1px solid green;
-    box-sizing: border-box;
-}
-
-
-.container4 {
-    border: 4px solid purple;
-    box-sizing: border-box;
-}
-
 .display-current-weather {
-    border: 2px solid rgb(93, 93, 248);
+    border: 2px solid gray;
     margin: auto;
-    box-sizing: border-box;
     font-size: 20px;
+    margin-bottom: 20px;
+    padding-top: 3px;
+    padding-bottom: 7px;
+    padding-left: 15px;
+}
+
+.title-5-day-forecast {
+    margin-bottom: 10px;
 }
 
 .display-current-weather h2 {
@@ -100,11 +115,6 @@
     list-style-type: none;
     padding: 0;
 }
-
-.generated-cities-li {
- 
-}
-
 
 .generated-city-btn {
     width: 100%;

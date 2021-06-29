@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Links to style sheets -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
@@ -12,10 +13,12 @@
     <title>Unit-6-HW</title>
 </head>
 <body>
+    <!-- Header -->
     <header class="navbar-dark my-navbar">  
             <span class="navbar-brand mb-0 h1 title">Weather Dashboard</span>
     </header>
     
+    <!-- Search bar to the side -->
     <div class="container1">
         <div class="row">
             <div class="col-sm-8 col-md-3 container2">
@@ -33,25 +36,26 @@
                 </div>
             </div>
 
-            
-
-          <div class="col-md-9 container4">
+        <!-- Container holding the weather data (current and 5d forecast) -->
+        <div class="col-md-9 container4">
             <div class="row gx-5">
+                <!-- Current weather display -->
                 <div class="col-sm-4 col-md-12 display-current-weather">
                     <h2 class = "current-city-name">Current Weather</h2>
                     <p class="current-temp">Temp: </p>
                     <p class="current-wind">Wind: </p>
                     <p class="current-humidity">Humidity: </p>
                     <p class =  "current-UVI">UV index: </p> 
-
                 </div>
                 <div class="col-sm-4 col-md-12 title-5-day-forecast">5 Day Forecast:</div>
+                <!-- Day one weather card -->
                 <div class="col-sm col-md-2 days day1">
                     <h3 class="day1-title">Day 1<span class="weather-icon-card1"></span></h3>
                     <p class="temp-day1">Temp: </p>
                     <p class="wind-day1">Wind: </p>
                     <p class="humidity-day1">Humidity: </p>
                 </div>
+                <!-- Day 2 weather card -->
                 <div class="col-sm col-md-2 days day2">
                     <h3 class="day2-title">Day 2</h3>
                     <i class="weather-icon-card2"></i>
@@ -59,6 +63,7 @@
                     <p class="wind-day2">Wind: </p>
                     <p class="humidity-day2">Humidity: </p>
                 </div>
+                <!-- Day 3 weather card -->
                 <div class="col-sm col-md-2 days day3">
                     <h3 class="day3-title">Day 3</h3>
                     <i class="weather-icon-card3"></i>
@@ -66,6 +71,7 @@
                     <p class="wind-day3">Wind: </p>
                     <p class="humidity-day3">Humidity: </p>
                 </div>
+                <!-- Day 4 weather card -->
                 <div class="col-sm col-md-2 days day4">
                     <h3 class="day4-title">Day 4</h3>
                     <i class="weather-icon-card4"></i>
@@ -73,6 +79,7 @@
                     <p class="wind-day4">Wind: </p>
                     <p class="humidity-day4">Humidity: </p>
                 </div>
+                <!-- Day 5 weather card -->
                 <div class="col-sm col-md-2 days day5">
                     <h3 class="day5-title">Day 5</h3>
                     <i class="weather-icon-card5"></i>
@@ -87,6 +94,7 @@
       </div>
 
 
+<!-- Sources for weather APIs, bootstrap, moment, JS, JQuery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
@@ -95,7 +103,6 @@ type="text/javascript"
 src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"
 ></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-<!-- MAKE SURE THESE BOTH WORK FOR LINKING TO THE OPENWEATHER API -->
 <script src ="https://cdnjs.cloudflare.com/ajax/libs/open-weather/2.0.0/openweather.min.js"></script> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/open-weather/2.0.0/openweather.js"></script>
 <script src="Assets/js/script.js"></script>

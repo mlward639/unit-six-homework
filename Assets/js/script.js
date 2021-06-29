@@ -52,13 +52,12 @@ var APIKey = '3a1df45ecc477b266d4c9b728ee5cd1e'
 
 var inputedCityName = ''  
 
-//var cityInput = document.querySelector("#input-city-name");
-var savedCityArray = [] //cityInput.value;
+var savedCityArray = []  
 var getSavedCityArray = []
 var combinedSavedCityArray
 var error1 = new Error('Cannot search the same city twice');
-var error2 = new Error('No value inputed for city name');
-var error3 = new Error('City name not found');
+var error2 = new Error('No value entered for city name');
+var error3 = new Error('City name not found'); //*********** */
 var lat;
 var lon;
  
@@ -73,13 +72,11 @@ function getInputValue () {
     inputedCityName = blankInputEl.value;
     console.log("inputctyname: " + inputedCityName)
     if (getSavedCityArray.includes(inputedCityName)) {
-        //is it ok to use alert here?
         window.alert("Cannot search the same city twice");
         blankInputEl.value = ''; 
         throw error;
     }
     if (!inputedCityName) {
-        //is it ok to use alert here?
         window.alert("Cannot leave blank. Must enter a city.");
         blankInputEl.value = ''; 
         throw error;
@@ -99,7 +96,7 @@ function getCurrentWeatherAPI() {
                 //is it ok to use alert here?
                 window.alert("ERROR");
                 throw error;
-            } */
+            } ************************ */ 
             return response.json();
         })
         .then(function(data) {
@@ -231,12 +228,12 @@ function clickGeneratedCityBtn () {
         //console.log("INPUT CITY", inputedCityName)
         //console.log("RUNNING FUNCTIPONNN")
         getCurrentWeatherAPI();
-        console.log("is clickcitybtn working? ");
+        //console.log("is clickcitybtn working? ");
     }) 
 }
 
 function getSavedCities (){
-    getSavedCityArray = JSON.parse(localStorage.getItem("savedCityNameArray")) || ""; //look here for why the button is calling the wrong value....?
+    getSavedCityArray = JSON.parse(localStorage.getItem("savedCityNameArray")) || "";  
     console.log("get cit arr&77777777: " + getSavedCityArray)
     for (i=0; i< getSavedCityArray.length; i++) {
         var generatedCityLi = document.createElement('li');
@@ -261,7 +258,7 @@ function getSavedCities (){
                     return response.json();
                 })
                 .then(function(data) {
-                    console.log("get current weather saved data for " + getSavedCityArray[i] + " next line") //why is this saying the getSavedCityArray[i] is undefined in console log but still pulling data from right city...?
+                    console.log("get current weather saved data for " + getSavedCityArray[i] + " next line") 
                     console.log(data);
                     lat = data.coord.lat;
                     //console.log("lat : " + lat);  
@@ -277,17 +274,15 @@ function getSavedCities (){
                             return response.json();
                             })
                             .then(function(data) {
-                            console.log("OneCall saved data for " + getSavedCityArray[i] + "next line") //why is this saying the getSavedCityArray[i] is undefined in console log but still pulling data from right city...?
+                            console.log("OneCall saved data for " + getSavedCityArray[i] + "next line") 
                             console.log(data)
                             })
-                        } //end getOneCall fxn
+                        } 
                     getSavedOneCallWeatherAPI();
-                }) //end then fxn data
-    } //end get saved weather api fxn
-}//end get saved cities fxn
+                }) 
+    } 
+}
 getSavedCities();
-
-//add error message if the city returns no data
 
 //create city list under search bar made of buttons with the name of the city searched
 function generateCitiesList () {
@@ -303,27 +298,6 @@ function generateCitiesList () {
     clickGeneratedCityBtn();
 }
 
-
-
-/* look at this when chaning between city to city; or look at searching the button text as the city when clicking the button so it re-searches it as the city... but without creating a new button...
-function redistribute () {
-    //move current to card one
-    //add weather icon once its working
-    if (generateCitiesList.length > 1) {
-        dayOneTitle.append(currentCityH2) }
-    // Move the paragraph from #myDiv1 to #myDiv2
-  //$('#myDiv2').append( $('#myDiv1>p') );
-}
-     currentCityH2.textContent = inputedCityName + " (" + today + ")";
-    weatherIconCurrent = document.createElement('img');
-    console.log("temp: " + data.main.temp);
-    currentTemp.textContent = "Temp: " + data.main.temp + "\u00B0 F";
-    console.log("wind: " + data.wind.speed);
-    currentWind.textContent = "Wind: " + data.wind.speed + " MPH";
-    console.log("humidity: " + data.main.humidity);
-    currentHumidity.textContent = "Humidity: " + data.main.humidity + "%";
-} */
-
 //run these functions when clicking the search button
 searchBtn.addEventListener('click', function creatingCityLists (event){
     getInputValue();
@@ -332,9 +306,4 @@ searchBtn.addEventListener('click', function creatingCityLists (event){
     getCurrentWeatherAPI();
     blankInputEl.value = ''; 
     return;
-}
-)
-
-
-//if click on button, search button value as search input
-//add search API fxn for saved cities
+})
