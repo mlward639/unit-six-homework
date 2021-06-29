@@ -84,7 +84,8 @@
 
 .days {
     background-color: rgb(28, 28, 78);
-    padding-top: 10px
+    padding-top: 10px;
+    margin-bottom: 5px;
 }
 
 .days h3 {

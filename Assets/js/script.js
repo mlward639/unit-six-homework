@@ -71,15 +71,15 @@ var generatedCityBtn;
 function getInputValue () {
     inputedCityName = blankInputEl.value;
     console.log("inputctyname: " + inputedCityName)
-    if (getSavedCityArray.includes(inputedCityName)) {
+    console.log("GET SAVED ARRAY : " + getSavedCityArray)
+    if (getSavedCityArray.includes(inputedCityName) || savedCityArray.includes(inputedCityName)) {
         window.alert("Cannot search the same city twice");
         blankInputEl.value = ''; 
-        throw error;
+        return;
     }
     if (!inputedCityName) {
         window.alert("Cannot leave blank. Must enter a city.");
         blankInputEl.value = ''; 
-        throw error;
     }
 } 
 
@@ -102,6 +102,11 @@ function getCurrentWeatherAPI() {
         .then(function(data) {
             console.log("get current weather data next line")
             console.log(data);
+            console.log("DATA COD: " + data.cod)
+            if (data.cod == "404") {
+                window.alert("Unknown city name. Try again.")
+                return;
+            }
             lat = data.coord.lat;
             //console.log("lat : " + lat);  
             lon = data.coord.lon;

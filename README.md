@@ -5,10 +5,13 @@ Created a weather dashboard featuring dynamically updated HTML and CSS. Used Ope
 
 ## Screenshots
 Screenshot of website when it loads: 
-<img src="#" alt="screenshot of weather website when it loads">
+<img src="Assets\images\Blank-webpage-screenshot.png" alt="screenshot of weather website when it loads">
 
 Screenshot of website after searching for cities and displaying weather conditions:
-<img src="#" alt="screenshot of weather website after searching for cities">
+<img src="Assets\images\city2-weather-screenshot.png" alt="screenshot of weather website after searching for cities">
+
+Screenshot of website after clicking one of previously searched cities on the left:
+<img src = "Assets\images\city-weather-screenshot.png" alt = "screenshot of weather website after clicking one of previously searched cities on the left">
 
 ## URLs
 <a href="https://github.com/mlward639/unit-six-homework">Link to GitHub Repository</a>
