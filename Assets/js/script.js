@@ -73,12 +73,12 @@ function getInputValue () {
     console.log("inputctyname: " + inputedCityName)
     console.log("GET SAVED ARRAY : " + getSavedCityArray)
     if (getSavedCityArray.includes(inputedCityName) || savedCityArray.includes(inputedCityName)) {
-        window.alert("Cannot search the same city twice");
+        window.alert("Duplicate search.");
         blankInputEl.value = ''; 
         return;
     }
     if (!inputedCityName) {
-        window.alert("Cannot leave blank. Must enter a city.");
+        window.alert("No city entered.");
         blankInputEl.value = ''; 
     }
 } 
